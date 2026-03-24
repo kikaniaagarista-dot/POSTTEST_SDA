@@ -61,7 +61,7 @@ void lihatJadwal(Kereta* data, int n) {
 
 void inputKereta(Kereta* data, int &n) {
     if (n >= 100) {
-        cout << "Data penuh bang!" << endl;
+        cout << "Data penuh !" << endl;
         return;
     }
     cout << "\n-- Input Kereta Baru --" << endl;

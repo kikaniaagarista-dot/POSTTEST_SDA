@@ -1,14 +1,11 @@
 #include <iostream>
 #include <string>
-#include <iomanip>
 
 using namespace std;
 
-
- // Nama : Kikania Agarista
- // NIM  : 2509106086
- // Kelas: B2 ' 25
-
+//Nama : Kikania Agarista
+//NIM  : 2509106086
+//Kelas: B2 ' 25
 
 
 struct Kereta {
@@ -18,6 +15,21 @@ struct Kereta {
     string tujuan;
     int harga;
 };
+
+
+string tambahSpasiKanan(string teks, int lebar) {
+    while (teks.length() < lebar) {
+        teks = teks + " ";
+    }
+    return teks;
+}
+
+string tambahSpasiKiri(string teks, int lebar) {
+    while (teks.length() < lebar) {
+        teks = " " + teks;
+    }
+    return teks;
+}
 
 
 void tukarData(Kereta* a, Kereta* b) {
@@ -36,8 +48,8 @@ void lihatJadwal(Kereta* data, int n) {
         cout << "Belum ada data." << endl;
         return;
     }
+
     for (int i = 0; i < n; i++) {
-        
         cout << (data + i)->nomor << "\t"; 
         cout << (data + i)->nama << "\t\t";
         cout << (data + i)->asal << " -> " << (data + i)->tujuan << "\t";
@@ -63,7 +75,6 @@ void inputKereta(Kereta* data, int &n) {
     cout << "Oke, data masuk!" << endl;
 }
 
-
 void cariRute(Kereta* data, int n, string asal, string tujuan) {
     cout << "\n-- Cari Rute: " << asal << " -> " << tujuan << " --" << endl;
     bool ketemu = false;
@@ -79,11 +90,9 @@ void cariRute(Kereta* data, int n, string asal, string tujuan) {
     }
 }
 
-
 void cariNomor(Kereta* data, int n, int kunci) {
     cout << "\n-- Binary Search Nomor: " << kunci << " --" << endl;
     
- 
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
             if ((data + j)->nomor > (data + j + 1)->nomor) {
@@ -91,16 +100,13 @@ void cariNomor(Kereta* data, int n, int kunci) {
             }
         }
     }
-    cout << "(Data diurutkan dulu biar bisa Binary Search)" << endl;
+    cout << "Mengurutkan data . . ." << endl;
 
-    int low = 0;
-    int high = n - 1;
+    int low = 0, high = n - 1;
     bool ketemu = false;
 
     while (low <= high) {
         int mid = low + (high - low) / 2;
-        cout << "Cek: Low=" << low << ", High=" << high << ", Mid=" << mid 
-             << " (Nomor: " << (data + mid)->nomor << ")" << endl;
         if ((data + mid)->nomor == kunci) {
             cout << ">> Ketemu di index " << mid << endl;
             ketemu = true;
@@ -116,6 +122,7 @@ void cariNomor(Kereta* data, int n, int kunci) {
         cout << ">> Nomor gak ditemukan." << endl;
     }
 }
+
 void merge(Kereta* data, int left, int mid, int right) {
     int n1 = mid - left + 1;
     int n2 = right - mid;
@@ -152,6 +159,7 @@ void urutNama(Kereta* data, int left, int right) {
         merge(data, left, mid, right);
     }
 }
+
 void urutHarga(Kereta* data, int n) {
     for (int i = 0; i < n - 1; i++) {
         int idxMin = i;
@@ -160,33 +168,34 @@ void urutHarga(Kereta* data, int n) {
                 idxMin = j;
             }
         }
+
         tukarData(&data[idxMin], &data[i]);
     }
     cout << "Berhasil urut harga termurah!" << endl;
 }
+
 
 int main() {
     Kereta dataKereta[100]; 
     int jmlData = 0;        
     int pil;                
 
-
-   dataKereta[0] = {101, "Argo Bromo", "Surabaya", "Jakarta", 500000};
-   dataKereta[1] = {102, "Taksaka", "Yogyakarta", "Jakarta", 450000};
-   dataKereta[2] = {103, "Gajayana", "Malang", "Jakarta", 550000};
-   dataKereta[3] = {104, "Argo Lawu", "Solo", "Jakarta", 475000};
-   dataKereta[4] = {105, "Bima", "Surabaya", "Jakarta", 525000};
-   dataKereta[5] = {106, "Turangga", "Bandung", "Surabaya", 380000};
-   dataKereta[6] = {107, "Mutiara Selatan", "Bandung", "Yogyakarta", 320000};
-   dataKereta[7] = {108, "Sancaka", "Surabaya", "Yogyakarta", 290000};
-   dataKereta[8] = {109, "Fajar Utama", "Jakarta", "Yogyakarta", 460000};
-   dataKereta[9] = {110, "Matarmaja", "Malang", "Jakarta", 420000};
-   dataKereta[10] = {111, "Kertajaya", "Surabaya", "Jakarta", 350000};
-   dataKereta[11] = {112, "Argo Wilis", "Bandung", "Surabaya", 410000};
-   dataKereta[12] = {113, "Lodaya", "Solo", "Bandung", 340000};
-   dataKereta[13] = {114, "Sawunggalih", "Kutoarjo", "Jakarta", 380000};
-   dataKereta[14] = {115, "Kahuripan", "Blitar", "Jakarta", 400000};
-   jmlData = 15; 
+    dataKereta[0] = {101, "Argo Bromo", "Surabaya", "Jakarta", 500000};
+    dataKereta[1] = {102, "Taksaka", "Yogyakarta", "Jakarta", 450000};
+    dataKereta[2] = {103, "Gajayana", "Malang", "Jakarta", 550000};
+    dataKereta[3] = {104, "Argo Lawu", "Solo", "Jakarta", 475000};
+    dataKereta[4] = {105, "Bima", "Surabaya", "Jakarta", 525000};
+    dataKereta[5] = {106, "Turangga", "Bandung", "Surabaya", 380000};
+    dataKereta[6] = {107, "Mutiara Selatan", "Bandung", "Yogyakarta", 320000};
+    dataKereta[7] = {108, "Sancaka", "Surabaya", "Yogyakarta", 290000};
+    dataKereta[8] = {109, "Fajar Utama", "Jakarta", "Yogyakarta", 460000};
+    dataKereta[9] = {110, "Matarmaja", "Malang", "Jakarta", 420000};
+    dataKereta[10] = {111, "Kertajaya", "Surabaya", "Jakarta", 350000};
+    dataKereta[11] = {112, "Argo Wilis", "Bandung", "Surabaya", 410000};
+    dataKereta[12] = {113, "Lodaya", "Solo", "Bandung", 340000};
+    dataKereta[13] = {114, "Sawunggalih", "Kutoarjo", "Jakarta", 380000};
+    dataKereta[14] = {115, "Kahuripan", "Blitar", "Jakarta", 400000};
+    jmlData = 15;
 
     do {
         cout << "\n-- SISTEM KERETA API --" << endl;
